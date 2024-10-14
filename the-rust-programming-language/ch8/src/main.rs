@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 fn main() {
     // needs type devinition if empty
     // let v: Vec<i32> = Vec::new();
@@ -83,7 +85,13 @@ fn main() {
     // let s = &hello[1..3];
 
     // use chars() and bytes() to iterate over individual element
-    for c in "привіт".chars() {
-        println!("{c}")
-    }
+    // for c in "привіт".chars() {
+    //     println!("{c}")
+    // }
+    
+    // HashMaps
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Blue"), 10);
+    
+
 }
