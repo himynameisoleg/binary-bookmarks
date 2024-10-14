@@ -88,10 +88,25 @@ fn main() {
     // for c in "привіт".chars() {
     //     println!("{c}")
     // }
-    
-    // HashMaps
-    let mut scores = HashMap::new();
-    scores.insert(String::from("Blue"), 10);
-    
 
+    // HashMaps
+    // let mut scores = HashMap::new();
+    // scores.insert(String::from("Blue"), 10);
+    // scores.insert(String::from("Yellow"), 50);
+    //
+    // let team_name = String::from("Blue");
+    // let score = scores.get(&team_name).copied().unwrap_or(0);
+    //
+    // // checking if key exists
+    // scores.entry(String::from("Green")).or_insert(50);
+
+    // updating a value based on the old value
+    let text = "hello world wonderful world";
+    let mut map = HashMap::new();
+
+    for word in text.split_whitespace() {
+        let count = map.entry(word).or_insert(0);
+        *count += 1;
+    }
+    println!("{:?}", map);
 }
