@@ -89,7 +89,7 @@
 // }
 
 //Traits
-use ch10::{Summary, Tweet};
+use ch10::{NewsArticle, Summary, Tweet};
 
 fn main() {
     let tweet = Tweet {
@@ -99,5 +99,17 @@ fn main() {
         retweet: false,
     };
 
-    println!("1 new tweet: {}", tweet.summarize())
+    println!("1 new tweet: {}", tweet.summarize());
+
+    let article = NewsArticle {
+        headline: String::from("Penguins with the Stanley Cup!"),
+        location: String::from("Pitsburgh, PA, USA"),
+        author: String::from("Iceburgh"),
+        content: String::from(
+            "The Pittsburgh Penguins once again are the best \
+        hokey team in the NHL.",
+        ),
+    };
+
+    println!("New article available {}", article.summarize());
 }
