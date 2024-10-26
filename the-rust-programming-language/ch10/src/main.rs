@@ -89,27 +89,27 @@
 // }
 
 //Traits
-use ch10::{NewsArticle, Summary, Tweet};
-
-fn main() {
-    let tweet = Tweet {
-        username: String::from("horse_ebook"),
-        content: String::from("as you already know"),
-        reply: false,
-        retweet: false,
-    };
-
-    println!("1 new tweet: {}", tweet.summarize());
-
-    let article = NewsArticle {
-        headline: String::from("Penguins with the Stanley Cup!"),
-        location: String::from("Pitsburgh, PA, USA"),
-        author: String::from("Iceburgh"),
-        content: String::from(
-            "The Pittsburgh Penguins once again are the best \
-        hokey team in the NHL.",
-        ),
-    };
-
-    println!("New article available {}", article.summarize());
-}
+// use ch10::{NewsArticle, Summary, Tweet};
+//
+// fn main() {
+//     let tweet = Tweet {
+//         username: String::from("horse_ebook"),
+//         content: String::from("as you already know"),
+//         reply: false,
+//         retweet: false,
+//     };
+//
+//     println!("1 new tweet: {}", tweet.summarize());
+//
+//     // let article = NewsArticle {
+//     //     headline: String::from("Penguins with the Stanley Cup!"),
+//     //     location: String::from("Pitsburgh, PA, USA"),
+//     //     author: String::from("Iceburgh"),
+//     //     content: String::from(
+//     //         "The Pittsburgh Penguins once again are the best \
+//     //     hokey team in the NHL.",
+//     //     ),
+//     // };
+//     //
+//     // println!("New article available {}", article.summarize());
+// }
