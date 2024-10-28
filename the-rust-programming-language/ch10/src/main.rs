@@ -113,3 +113,127 @@
 //     //
 //     // println!("New article available {}", article.summarize());
 // }
+
+// Lifetimes
+// this does not compile since x goes out of scope by the time it is used
+// fn main() {
+//     let r;
+//     {
+//         let x = 5;
+//         r = &x;
+//     }
+//
+//     println!("r: {r}");
+// }
+
+// Generic lifetimes in functions
+// fn main() {
+//     let string1 = String::from("abcd");
+//     let string2 = "xyz";
+//     let result = longest(string1.as_str(), string2);
+//     println!("The longest is: {result}");
+// }
+//
+// fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+//     if x.len() > y.len() {
+//         x
+//     } else {
+//         y
+//     }
+// }
+
+// this should fail since string2 goes out of scope
+// fn main() {
+//     let string1 = String::from("long string is long");
+//     let result;
+//     {
+//         let string2 = String::from("xyz ");
+//         result = longest(string1.as_str(), string2.as_str());
+//     }
+//     println!("longest string is {result}");
+// }
+//
+// fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+//     if x.len() > y.len() {
+//         x
+//     } else {
+//         y
+//     }
+// }
+
+// Lifetime annotations in structs
+// struct ImportantExcerpt<'a> {
+//     part: &'a str,
+// }
+//
+// fn main() {
+//     let novel = String::from("Call me Ishmael. Some years ago...");
+//     let first_sentence = novel.split(".").next().expect("Could not find a '.'");
+//     let _i = ImportantExcerpt {
+//         part: first_sentence,
+//     };
+// }
+
+// Lifetime Elision - all unctions and structs with references have lifetimes but dont necesarrily
+// need explicit lifetime annotations
+// fn first_word(s: &str) -> &str {
+//     let bytes = s.as_bytes();
+//     for (i, &item) in bytes.iter().enumerate() {
+//         if item == b' ' {
+//             return &s[0..i];
+//         }
+//     }
+//
+//     &s[..]
+// }
+//
+// // explicit annotations
+// fn first_wordd<'a> (s: &'a str) -> &'a str {
+//     todo!()
+// }
+
+// Lifetime annotation in Method Definitions
+// struct ImportantExcerpt<'a> {
+//     part: &'a str,
+// }
+//
+// impl<'a> ImportantExcerpt<'a> {
+//     fn level(&self) -> i32 {
+//         3
+//     }
+//
+//     fn announce_and_return_part(&self, announcement: &str) -> &str {
+//         println!("Attention: {announcement}");
+//         self.part
+//     }
+// }
+//
+// fn main() {
+//     todo!()
+// }
+//
+
+// Static lifetimes - live for the duration of the program
+// let s: &'static str = "I have a static lifetime";
+
+// Putting it all togeter: Generics, Trait Bounds and Lifetimes
+use std::fmt::Display;
+
+fn longest_with_announcement<'a, T>(x: &'a str, y: &'a str, ana: T) -> &'a str
+where
+    T: Display,
+{
+    println!("Announcement! {ana}");
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+
+fn main() {
+    let a = String::from("short");
+    let b = String::from("longest");
+    let res = longest_with_announcement(a.as_str(), b.as_str(), 45);
+    println!("long: {res}");
+}
