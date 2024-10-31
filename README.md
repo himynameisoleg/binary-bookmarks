@@ -1,2 +1,2 @@
 # binary-bookmarks
-personal collection of software engineering books, articles, and code from the stuff I’m currently reading. 
+personal collection of notes and code-snippets from software engineering books, articles, and stuff I’m currently reading. 
