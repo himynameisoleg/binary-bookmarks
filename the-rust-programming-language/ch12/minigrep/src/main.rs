@@ -1,4 +1,5 @@
 use std::env;
+use std::error::Error;
 use std::fs;
 use std::process;
 
@@ -7,16 +8,26 @@ fn main() {
 
     let config = Config::new(&args).unwrap_or_else(|err| {
         println!("Problem parsing args: {}", err);
+
         process::exit(1);
     });
 
     println!("Looking for {}", config.query);
     println!("In file {}", config.filename);
 
-    let contents =
-        fs::read_to_string(config.filename).expect("Should have been able to read file.");
+    if let Err(e) = run(config) {
+        println!("Appliction error: {}", e);
+
+        process::exit(1);
+    }
+}
+
+fn run(config: Config) -> Result<(), Box<dyn Error>> {
+    let contents = fs::read_to_string(config.filename)?;
 
     println!("With text:\n{}", contents);
+
+    Ok(())
 }
 
 struct Config {
