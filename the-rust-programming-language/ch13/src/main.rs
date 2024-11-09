@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use std::thread;
 use std::time::Duration;
 
@@ -13,7 +14,7 @@ where
     T: Fn(u32) -> u32,
 {
     calculation: T,
-    value: Option<u32>,
+    values: HashMap<u32, u32>,
 }
 
 impl<T> Catcher<T>
@@ -23,18 +24,18 @@ where
     fn new(calculation: T) -> Catcher<T> {
         Catcher {
             calculation,
-            value: None,
+            values: HashMap::new(),
         }
     }
 
+    // TODO: refactor with hashmap
     fn value(&mut self, arg: u32) -> u32 {
-        match self.value {
-            Some(v) => v,
-            None => {
-                let v = (self.calculation)(arg);
-                self.value = Some(v);
-                v
-            }
+        if let Some(&v) = self.values.get(&arg) {
+            v
+        } else {
+            let v = (self.calculation)(arg);
+            self.values.insert(arg, v);
+            v
         }
     }
 }
@@ -61,4 +62,14 @@ fn simlulated_expensive_calculation(intensity: u32) -> u32 {
     println!("calculating slowly...");
     thread::sleep(Duration::from_secs(2));
     intensity
+}
+
+#[test]
+fn call_with_different_values() {
+    let mut c = Catcher::new(|a| a);
+
+    let v1 = c.value(1);
+    let v2 = c.value(2);
+
+    assert_eq!(v2, 2);
 }
