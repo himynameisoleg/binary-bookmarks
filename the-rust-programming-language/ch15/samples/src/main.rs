@@ -32,9 +32,19 @@ impl<T> Deref for MyBox<T> {
     }
 }
 fn main() {
-    let x = 5;
-    let y = MyBox::new(x);
+    // let x = 5;
+    // let y = MyBox::new(x);
+    //
+    // assert_eq!(5, x);
+    // assert_eq!(5, *y); // *(y.deref())
 
-    assert_eq!(5, x);
-    assert_eq!(5, *y); // *(y.deref())
+    let m = MyBox::new(String::from("Rust"));
+    hello(&m);
+    // because of Deref coersion we turn &MyBox<String> into &String into &str
+    // otherwise we would need to explicitly dereference with `hello(&(*m)[..];`
+    // to match all of the signitures
+}
+
+fn hello(name: &str) {
+    println!("Hello, {}!", name);
 }
