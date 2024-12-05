@@ -17,15 +17,30 @@
 //     }
 // }
 
-// Using move Closures with Threads
-use std::thread;
+// // Using move Closures with Threads
+// use std::thread;
+//
+// fn main() {
+//     let v = vec![1, 2, 3];
+//
+//     let handle = thread::spawn(move || {
+//         println!("Here is a vector: {:?}", v);
+//     });
+//
+//     handle.join().unwrap();
+// }
 
+use std::{sync::mpsc, thread};
+
+// safely passing messages between Threads
 fn main() {
-    let v = vec![1, 2, 3];
+    let (tx, rx) = mpsc::channel();
 
-    let handle = thread::spawn(move || {
-        println!("Here is a vector: {:?}", v);
+    thread::spawn(move || {
+        let val = String::from("hi");
+        tx.send(val).unwrap();
     });
 
-    handle.join().unwrap();
+    let received = rx.recv().unwrap();
+    println!("Got: {}", received);
 }
