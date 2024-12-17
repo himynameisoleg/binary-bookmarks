@@ -140,28 +140,62 @@
 // }
 
 // Destructuring Nested Structs and Enums
-enum Color {
-    Rgb(i32, i32, i32),
-    Hsv(i32, i32, i32),
-}
+// enum Color {
+//     Rgb(i32, i32, i32),
+//     Hsv(i32, i32, i32),
+// }
+//
+// enum Message {
+//     Quit,
+//     Move { x: i32, y: i32 },
+//     Write(String),
+//     ChangeColor(Color),
+// }
+//
+// fn main() {
+//     let msg = Message::ChangeColor(Color::Hsv(0, 160, 255));
+//
+//     match msg {
+//         Message::ChangeColor(Color::Rgb(r, g, b)) => {
+//             println!("change color to r {}, g {}, b{}", r, g, b)
+//         }
+//         Message::ChangeColor(Color::Hsv(h, s, v)) => {
+//             println!("change color to h {}, s {}, v {}", h, s, v)
+//         }
+//         _ => (),
+//     }
+// }
 
-enum Message {
-    Quit,
-    Move { x: i32, y: i32 },
-    Write(String),
-    ChangeColor(Color),
-}
+// Ignoring Values in a Pattern
+// fn foo(_: i32, y: i32) {
+//     println!("only uses y: {}", y);
+// }
+//
+// fn main() {
+//     foo(3, 4);
+// }
+
+// Ignoring remaining parts with `..`
+// struct Point {
+//     x: i32,
+//     y: i32,
+//     z: i32,
+// }
+//
+// fn main() {
+//     let origin = Point { x: 0, y: 0, z: 0 };
+//
+//     match origin {
+//         Point { x, .. } => print!("x is {}", x),
+//     }
+// }
 
 fn main() {
-    let msg = Message::ChangeColor(Color::Hsv(0, 160, 255));
+    let numbers = (2, 4, 8, 16, 32);
 
-    match msg {
-        Message::ChangeColor(Color::Rgb(r, g, b)) => {
-            println!("change color to r {}, g {}, b{}", r, g, b)
+    match numbers {
+        (first, .., last) => {
+            println!("nums : {} ,{}", first, last);
         }
-        Message::ChangeColor(Color::Hsv(h, s, v)) => {
-            println!("change color to h {}, s {}, v {}", h, s, v)
-        }
-        _ => (),
     }
 }
