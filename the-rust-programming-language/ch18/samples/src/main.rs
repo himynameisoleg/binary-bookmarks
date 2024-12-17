@@ -115,26 +115,53 @@
 // }
 
 // Destructuring Enums
+// enum Message {
+//     Quit,
+//     Move { x: i32, y: i32 },
+//     Write(String),
+//     ChangeColor(i32, i32, i32),
+// }
+//
+// fn main() {
+//     let msg = Message::ChangeColor(0, 160, 255);
+//
+//     match msg {
+//         Message::Quit => {
+//             println!("Quit has no data to destructure")
+//         }
+//         Message::Move { x, y } => {
+//             println!("move x {}, and y {}", x, y);
+//         }
+//         Message::Write(text) => println!("text message: {}", text),
+//         Message::ChangeColor(r, g, b) => {
+//             println!("change color to red {}, green {}, blue {}", r, g, b)
+//         }
+//     }
+// }
+
+// Destructuring Nested Structs and Enums
+enum Color {
+    Rgb(i32, i32, i32),
+    Hsv(i32, i32, i32),
+}
+
 enum Message {
     Quit,
     Move { x: i32, y: i32 },
     Write(String),
-    ChangeColor(i32, i32, i32),
+    ChangeColor(Color),
 }
 
 fn main() {
-    let msg = Message::ChangeColor(0, 160, 255);
+    let msg = Message::ChangeColor(Color::Hsv(0, 160, 255));
 
     match msg {
-        Message::Quit => {
-            println!("Quit has no data to destructure")
+        Message::ChangeColor(Color::Rgb(r, g, b)) => {
+            println!("change color to r {}, g {}, b{}", r, g, b)
         }
-        Message::Move { x, y } => {
-            println!("move x {}, and y {}", x, y);
+        Message::ChangeColor(Color::Hsv(h, s, v)) => {
+            println!("change color to h {}, s {}, v {}", h, s, v)
         }
-        Message::Write(text) => println!("text message: {}", text),
-        Message::ChangeColor(r, g, b) => {
-            println!("change color to red {}, green {}, blue {}", r, g, b)
-        }
+        _ => (),
     }
 }
