@@ -50,6 +50,42 @@ fn main() {
     // if let x = 5 {
     //     //this will fail to compile since this is an Irrefutable match pattern
     // }
+
+    // Matching Literals
+    // let x = 1;
+    //
+    // match x {
+    //     1 => println!("one"),
+    //     2 => println!("two"),
+    //     _ => println!("any"),
+    // }
+
+    // matching named vars
+    // let x = Some(5);
+    // let y = 10;
+    //
+    // match x {
+    //     Some(50) => println!("Got 50"),
+    //     Some(y) => println!("Matched y = {:?}", y),
+    //     _ => println!("default case"),
+    // }
+    //
+    // println!("At the end: x={:?}, y={:?}", x, y);
+
+    // multiple patterns
+    // let x = 1;
+    // match x {
+    //     1 | 2 => println!("one or two"),
+    //     3 => println!("three"),
+    //     _ => println!("default"),
+    // }
+
+    // matching ranges
+    let x = 5;
+    match x {
+        1..=5 => println!("one though five"),
+        _ => println!("default"),
+    }
 }
 
 // function param matching with tuple
