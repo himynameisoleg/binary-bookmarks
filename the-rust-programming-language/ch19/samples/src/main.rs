@@ -48,13 +48,30 @@
 //     }
 // }
 
-// Using `extern` to call external code
-extern "C" {
-    fn abs(input: i32) -> i32;
+// // Using `extern` to call external code
+// extern "C" {
+//     fn abs(input: i32) -> i32;
+// }
+//
+// fn main() {
+//     unsafe {
+//         println!("abs value of -3 according to C: {}", abs(-3));
+//     }
+// }
+
+// Access / Modify a mutable static variable
+static mut COUNTER: u32 = 0;
+
+fn add_to_count(inc: u32) {
+    unsafe {
+        COUNTER += inc;
+    }
 }
 
 fn main() {
+    add_to_count(3);
+
     unsafe {
-        println!("abs value of -3 according to C: {}", abs(-3));
+        println!("COUNTER: {}", COUNTER);
     }
 }
