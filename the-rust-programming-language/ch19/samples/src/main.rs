@@ -60,18 +60,54 @@
 // }
 
 // Access / Modify a mutable static variable
-static mut COUNTER: u32 = 0;
+// static mut COUNTER: u32 = 0;
+//
+// fn add_to_count(inc: u32) {
+//     unsafe {
+//         COUNTER += inc;
+//     }
+// }
+//
+// fn main() {
+//     add_to_count(3);
+//
+//     unsafe {
+//         println!("COUNTER: {}", COUNTER);
+//     }
+// }
 
-fn add_to_count(inc: u32) {
-    unsafe {
-        COUNTER += inc;
+// Fully qualifyed syntax for calling methods with same name
+trait Pilot {
+    fn fly(&self);
+}
+
+trait Wizard {
+    fn fly(&self);
+}
+
+struct Human;
+
+impl Pilot for Human {
+    fn fly(&self) {
+        println!("Pilot");
+    }
+}
+
+impl Wizard for Human {
+    fn fly(&self) {
+        println!("Wizard");
+    }
+}
+
+impl Human {
+    fn fly(&self) {
+        println!("Human");
     }
 }
 
 fn main() {
-    add_to_count(3);
-
-    unsafe {
-        println!("COUNTER: {}", COUNTER);
-    }
+    let person = Human;
+    Pilot::fly(&person);
+    Wizard::fly(&person);
+    person.fly();
 }
