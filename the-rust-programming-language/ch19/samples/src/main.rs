@@ -76,38 +76,52 @@
 //     }
 // }
 
-// Fully qualifyed syntax for calling methods with same name
-trait Pilot {
-    fn fly(&self);
+// // Fully qualifyed syntax for calling methods with same name
+// trait Pilot {
+//     fn fly(&self);
+// }
+//
+// trait Wizard {
+//     fn fly(&self);
+// }
+//
+// struct Human;
+//
+// impl Pilot for Human {
+//     fn fly(&self) {
+//         println!("Pilot");
+//     }
+// }
+//
+// impl Wizard for Human {
+//     fn fly(&self) {
+//         println!("Wizard");
+//     }
+// }
+//
+// impl Human {
+//     fn fly(&self) {
+//         println!("Human");
+//     }
+// }
+//
+// fn main() {
+//     let person = Human;
+//     Pilot::fly(&person);
+//     Wizard::fly(&person);
+//     person.fly();
+// }
+
+// Adanced Function and Closures
+fn add_one(x: i32) -> i32 {
+    x + 1
 }
 
-trait Wizard {
-    fn fly(&self);
-}
-
-struct Human;
-
-impl Pilot for Human {
-    fn fly(&self) {
-        println!("Pilot");
-    }
-}
-
-impl Wizard for Human {
-    fn fly(&self) {
-        println!("Wizard");
-    }
-}
-
-impl Human {
-    fn fly(&self) {
-        println!("Human");
-    }
+fn do_twice(f: fn(i32) -> i32, arg: i32) -> i32 {
+    f(arg) + f(arg)
 }
 
 fn main() {
-    let person = Human;
-    Pilot::fly(&person);
-    Wizard::fly(&person);
-    person.fly();
+    let answer = do_twice(add_one, 5);
+    println!("ans: {}", answer);
 }
